@@ -6,11 +6,10 @@ WORKDIR /opt
 RUN git clone -b master https://github.com/andrewgaul/s3proxy.git
 
 WORKDIR /opt/s3proxy
-RUN mvn package
+RUN mvn package -Dmaven.test.skip=true
 
 ADD ./s3proxy.conf /opt/s3proxy/s3proxy.conf
 
-EXPOSE 8080
+EXPOSE 4567
 
 ENTRYPOINT ./target/s3proxy --properties ./s3proxy.conf
-
